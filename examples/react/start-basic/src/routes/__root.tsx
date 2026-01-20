@@ -96,7 +96,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             Users
           </Link>{' '}
           <Link
-            to="/route-a"
+            to="/boop/route-a"
             activeProps={{
               className: 'font-bold',
             }}
