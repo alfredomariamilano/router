@@ -30,6 +30,8 @@ function LayoutAComponent() {
     }),
   )
 
+  // types are broken, because the useSearch expects a trailing slash in the route ID.
+  // using the route ID from the index test (/beep/_pathlessLayout/_nested-layout/) returns the correct types
   console.log('Search Params:', searchParams?.bloop)
 
   return <div>I'm index!</div>

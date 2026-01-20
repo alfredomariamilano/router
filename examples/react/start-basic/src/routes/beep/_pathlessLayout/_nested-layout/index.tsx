@@ -10,6 +10,7 @@ const validateSearch = z.object({
   bloop: z.string().optional(),
 })
 
+// The route ID has a trailing slash, which is different behaviour than `route.tsx`
 export const Route = createFileRoute('/beep/_pathlessLayout/_nested-layout/')({
   validateSearch,
   component: LayoutAComponent,
@@ -25,6 +26,7 @@ function LayoutAComponent() {
   console.log(
     'Nested Layout Match Route:',
     matchRoute({
+      // the trailing slash is preserved here as well, which breaks the types
       to: Route.fullPath,
       from: Route.fullPath,
     }),
