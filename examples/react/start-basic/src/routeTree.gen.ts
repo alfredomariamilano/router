@@ -32,6 +32,8 @@ import { Route as BoopPathlessLayoutNestedLayoutRouteBRouteImport } from './rout
 import { Route as BoopPathlessLayoutNestedLayoutRouteARouteImport } from './routes/boop/_pathlessLayout/_nested-layout/route-a'
 import { Route as BeepPathlessLayoutNestedLayoutRouteBRouteImport } from './routes/beep/_pathlessLayout/_nested-layout/route-b'
 import { Route as BeepPathlessLayoutNestedLayoutRouteARouteImport } from './routes/beep/_pathlessLayout/_nested-layout/route-a'
+import { Route as BoopPathlessLayoutNestedLayoutNestedRouteRouteImport } from './routes/boop/_pathlessLayout/_nested-layout/nested/route'
+import { Route as BeepPathlessLayoutNestedLayoutNestedIndexRouteImport } from './routes/beep/_pathlessLayout/_nested-layout/nested/index'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
@@ -153,6 +155,18 @@ const BeepPathlessLayoutNestedLayoutRouteARoute =
     path: '/route-a',
     getParentRoute: () => BeepPathlessLayoutNestedLayoutRoute,
   } as any)
+const BoopPathlessLayoutNestedLayoutNestedRouteRoute =
+  BoopPathlessLayoutNestedLayoutNestedRouteRouteImport.update({
+    id: '/nested',
+    path: '/nested',
+    getParentRoute: () => BoopPathlessLayoutNestedLayoutRoute,
+  } as any)
+const BeepPathlessLayoutNestedLayoutNestedIndexRoute =
+  BeepPathlessLayoutNestedLayoutNestedIndexRouteImport.update({
+    id: '/nested/',
+    path: '/nested/',
+    getParentRoute: () => BeepPathlessLayoutNestedLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -170,11 +184,13 @@ export interface FileRoutesByFullPath {
   '/users/': typeof UsersIndexRoute
   '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/posts/$postId/deep': typeof PostsPostIdDeepRoute
+  '/boop/nested': typeof BoopPathlessLayoutNestedLayoutNestedRouteRoute
   '/beep/route-a': typeof BeepPathlessLayoutNestedLayoutRouteARoute
   '/beep/route-b': typeof BeepPathlessLayoutNestedLayoutRouteBRoute
   '/boop/route-a': typeof BoopPathlessLayoutNestedLayoutRouteARoute
   '/boop/route-b': typeof BoopPathlessLayoutNestedLayoutRouteBRoute
   '/beep/': typeof BeepPathlessLayoutNestedLayoutIndexRoute
+  '/beep/nested/': typeof BeepPathlessLayoutNestedLayoutNestedIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -190,10 +206,12 @@ export interface FileRoutesByTo {
   '/users': typeof UsersIndexRoute
   '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/posts/$postId/deep': typeof PostsPostIdDeepRoute
+  '/boop/nested': typeof BoopPathlessLayoutNestedLayoutNestedRouteRoute
   '/beep/route-a': typeof BeepPathlessLayoutNestedLayoutRouteARoute
   '/beep/route-b': typeof BeepPathlessLayoutNestedLayoutRouteBRoute
   '/boop/route-a': typeof BoopPathlessLayoutNestedLayoutRouteARoute
   '/boop/route-b': typeof BoopPathlessLayoutNestedLayoutRouteBRoute
+  '/beep/nested': typeof BeepPathlessLayoutNestedLayoutNestedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -214,11 +232,13 @@ export interface FileRoutesById {
   '/api/users/$userId': typeof ApiUsersUserIdRoute
   '/beep/_pathlessLayout/_nested-layout': typeof BeepPathlessLayoutNestedLayoutRouteWithChildren
   '/posts_/$postId/deep': typeof PostsPostIdDeepRoute
+  '/boop/_pathlessLayout/_nested-layout/nested': typeof BoopPathlessLayoutNestedLayoutNestedRouteRoute
   '/beep/_pathlessLayout/_nested-layout/route-a': typeof BeepPathlessLayoutNestedLayoutRouteARoute
   '/beep/_pathlessLayout/_nested-layout/route-b': typeof BeepPathlessLayoutNestedLayoutRouteBRoute
   '/boop/_pathlessLayout/_nested-layout/route-a': typeof BoopPathlessLayoutNestedLayoutRouteARoute
   '/boop/_pathlessLayout/_nested-layout/route-b': typeof BoopPathlessLayoutNestedLayoutRouteBRoute
   '/beep/_pathlessLayout/_nested-layout/': typeof BeepPathlessLayoutNestedLayoutIndexRoute
+  '/beep/_pathlessLayout/_nested-layout/nested/': typeof BeepPathlessLayoutNestedLayoutNestedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -238,11 +258,13 @@ export interface FileRouteTypes {
     | '/users/'
     | '/api/users/$userId'
     | '/posts/$postId/deep'
+    | '/boop/nested'
     | '/beep/route-a'
     | '/beep/route-b'
     | '/boop/route-a'
     | '/boop/route-b'
     | '/beep/'
+    | '/beep/nested/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -258,10 +280,12 @@ export interface FileRouteTypes {
     | '/users'
     | '/api/users/$userId'
     | '/posts/$postId/deep'
+    | '/boop/nested'
     | '/beep/route-a'
     | '/beep/route-b'
     | '/boop/route-a'
     | '/boop/route-b'
+    | '/beep/nested'
   id:
     | '__root__'
     | '/'
@@ -281,11 +305,13 @@ export interface FileRouteTypes {
     | '/api/users/$userId'
     | '/beep/_pathlessLayout/_nested-layout'
     | '/posts_/$postId/deep'
+    | '/boop/_pathlessLayout/_nested-layout/nested'
     | '/beep/_pathlessLayout/_nested-layout/route-a'
     | '/beep/_pathlessLayout/_nested-layout/route-b'
     | '/boop/_pathlessLayout/_nested-layout/route-a'
     | '/boop/_pathlessLayout/_nested-layout/route-b'
     | '/beep/_pathlessLayout/_nested-layout/'
+    | '/beep/_pathlessLayout/_nested-layout/nested/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -464,6 +490,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BeepPathlessLayoutNestedLayoutRouteARouteImport
       parentRoute: typeof BeepPathlessLayoutNestedLayoutRoute
     }
+    '/boop/_pathlessLayout/_nested-layout/nested': {
+      id: '/boop/_pathlessLayout/_nested-layout/nested'
+      path: '/nested'
+      fullPath: '/boop/nested'
+      preLoaderRoute: typeof BoopPathlessLayoutNestedLayoutNestedRouteRouteImport
+      parentRoute: typeof BoopPathlessLayoutNestedLayoutRoute
+    }
+    '/beep/_pathlessLayout/_nested-layout/nested/': {
+      id: '/beep/_pathlessLayout/_nested-layout/nested/'
+      path: '/nested'
+      fullPath: '/beep/nested/'
+      preLoaderRoute: typeof BeepPathlessLayoutNestedLayoutNestedIndexRouteImport
+      parentRoute: typeof BeepPathlessLayoutNestedLayoutRoute
+    }
   }
 }
 
@@ -507,6 +547,7 @@ interface BeepPathlessLayoutNestedLayoutRouteChildren {
   BeepPathlessLayoutNestedLayoutRouteARoute: typeof BeepPathlessLayoutNestedLayoutRouteARoute
   BeepPathlessLayoutNestedLayoutRouteBRoute: typeof BeepPathlessLayoutNestedLayoutRouteBRoute
   BeepPathlessLayoutNestedLayoutIndexRoute: typeof BeepPathlessLayoutNestedLayoutIndexRoute
+  BeepPathlessLayoutNestedLayoutNestedIndexRoute: typeof BeepPathlessLayoutNestedLayoutNestedIndexRoute
 }
 
 const BeepPathlessLayoutNestedLayoutRouteChildren: BeepPathlessLayoutNestedLayoutRouteChildren =
@@ -517,6 +558,8 @@ const BeepPathlessLayoutNestedLayoutRouteChildren: BeepPathlessLayoutNestedLayou
       BeepPathlessLayoutNestedLayoutRouteBRoute,
     BeepPathlessLayoutNestedLayoutIndexRoute:
       BeepPathlessLayoutNestedLayoutIndexRoute,
+    BeepPathlessLayoutNestedLayoutNestedIndexRoute:
+      BeepPathlessLayoutNestedLayoutNestedIndexRoute,
   }
 
 const BeepPathlessLayoutNestedLayoutRouteWithChildren =
@@ -537,12 +580,15 @@ const BeepPathlessLayoutRouteWithChildren =
   BeepPathlessLayoutRoute._addFileChildren(BeepPathlessLayoutRouteChildren)
 
 interface BoopPathlessLayoutNestedLayoutRouteChildren {
+  BoopPathlessLayoutNestedLayoutNestedRouteRoute: typeof BoopPathlessLayoutNestedLayoutNestedRouteRoute
   BoopPathlessLayoutNestedLayoutRouteARoute: typeof BoopPathlessLayoutNestedLayoutRouteARoute
   BoopPathlessLayoutNestedLayoutRouteBRoute: typeof BoopPathlessLayoutNestedLayoutRouteBRoute
 }
 
 const BoopPathlessLayoutNestedLayoutRouteChildren: BoopPathlessLayoutNestedLayoutRouteChildren =
   {
+    BoopPathlessLayoutNestedLayoutNestedRouteRoute:
+      BoopPathlessLayoutNestedLayoutNestedRouteRoute,
     BoopPathlessLayoutNestedLayoutRouteARoute:
       BoopPathlessLayoutNestedLayoutRouteARoute,
     BoopPathlessLayoutNestedLayoutRouteBRoute:
