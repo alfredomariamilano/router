@@ -4,6 +4,7 @@ import {
   Link,
   Scripts,
   createRootRoute,
+  useMatches,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import * as React from 'react'
@@ -63,6 +64,16 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const matches = useMatches({
+    select (matches) {
+      return matches.map((match) => {
+        return [match.id, match.fullPath]
+      })
+    },
+  })
+
+  console.log(matches)
+
   return (
     <html>
       <head>
@@ -94,6 +105,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             }}
           >
             Users
+          </Link>{' '}
+          <Link
+            to="/boop/route-a"
+            activeProps={{
+              className: 'font-bold',
+            }}
+          >
+            Pathless Layout boop
           </Link>{' '}
           <Link
             to="/route-a"
